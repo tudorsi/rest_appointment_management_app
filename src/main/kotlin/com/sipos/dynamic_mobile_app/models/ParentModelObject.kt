@@ -11,5 +11,5 @@ open class ParentModelObject: Serializable {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private var uuid: UUID? = null
+    protected var uuid: UUID? = null
 }
