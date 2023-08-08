@@ -3,6 +3,7 @@ package com.sipos.dynamic_mobile_app.models
 import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import java.util.*
 
 @Entity
 @Table(name = "account_credentials", uniqueConstraints = [UniqueConstraint(columnNames = arrayOf("email"))])
@@ -13,6 +14,10 @@ class AccountCredentials : ParentModelObject(), UserDetails {
     @OneToOne
     @JoinColumn(name = "userDetails")
     var details: AccountDetails? = null
+
+    fun getUUID(): UUID? {
+        return this.uuid
+    }
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableSetOf()
