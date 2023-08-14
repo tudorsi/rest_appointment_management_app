@@ -56,10 +56,14 @@ class WebSecurityConfiguration() {
     @Bean
     open fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http {
-            csrf { disable() }
+            csrf {
+                disable()
+
+            }
             httpBasic { }
             authorizeRequests {
                 authorize("/api/account/**", permitAll)
+//                authorize(anyRequest,authenticated)
 
             }
             oauth2ResourceServer {

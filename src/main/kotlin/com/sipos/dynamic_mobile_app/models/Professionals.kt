@@ -1,19 +1,23 @@
 package com.sipos.dynamic_mobile_app.models
 
 import jakarta.persistence.*
+import java.util.*
 
 @Entity
 @Table(name = "professionals")
 class Professionals : ParentModelObject() {
-    val firstName: String? = null
-    val lastName: String? = null
+    var firstName: String? = null
+    var lastName: String? = null
 
     @ManyToOne
     @JoinColumn(name = "business")
-    val business: Businesses? = null
+    var business: Businesses? = null
 
-    @OneToMany
-    @JoinColumn(name = "services")
-    val services: List<Services>? = null
+    @ManyToMany(mappedBy = "professionals")
+    val services: MutableList<Services> = mutableListOf()
+
+    fun getUUID(): UUID? {
+        return this.uuid
+    }
 
 }
