@@ -24,6 +24,11 @@ class BusinessController(
     ): SuccessResponse {
         val business = Businesses()
         business.name = businessDto.name
+        business.city = businessDto.city
+        business.county = businessDto.county
+        business.address = businessDto.address
+        business.latitude = businessDto.latitude
+        business.longitude = businessDto.longitude
 
         businessRepository.save(business)
         return SuccessResponse(true)
