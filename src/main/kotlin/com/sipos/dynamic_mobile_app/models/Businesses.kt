@@ -12,6 +12,11 @@ class Businesses : ParentModelObject() {
 
     @OneToMany(mappedBy = "business")
     var professionals: MutableList<Professionals>? = null
+    var city: String? = null
+    var county: String? = null
+    var address: String? = null
+    var latitude: Double? = null
+    var longitude: Double? = null
 
     fun getUUID(): UUID? {
         return this.uuid
