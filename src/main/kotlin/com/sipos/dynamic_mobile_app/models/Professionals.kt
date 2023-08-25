@@ -2,6 +2,8 @@ package com.sipos.dynamic_mobile_app.models
 
 import jakarta.persistence.*
 import java.util.*
+import javax.validation.constraints.DecimalMax
+import javax.validation.constraints.DecimalMin
 
 @Entity
 @Table(name = "professionals")
@@ -16,6 +18,9 @@ class Professionals : ParentModelObject() {
     @ManyToMany(mappedBy = "professionals")
     val services: MutableList<Services> = mutableListOf()
 
+    @DecimalMax("5.0")
+    @DecimalMin("0.0")
+    val rating: Double? = null
     fun getUUID(): UUID? {
         return this.uuid
     }

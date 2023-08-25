@@ -9,7 +9,7 @@ data class BusinessResponseDto(
     var city: String,
     var county: String,
     var address: String,
-    var ltitude: Double,
+    var latitude: Double,
     var longitude: Double
 ) {
     companion object {
