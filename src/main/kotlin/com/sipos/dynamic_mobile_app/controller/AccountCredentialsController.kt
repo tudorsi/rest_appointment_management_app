@@ -45,6 +45,7 @@ class AccountCredentialsController(
 
         return LoginResponseDto(
             token = tokenService.createToken(user),
+            userId = user.details?.getUUID()!!
         )
     }
 
