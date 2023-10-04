@@ -5,17 +5,17 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import java.util.*
-
 @Entity
-@Table(name = "appointments")
+@Table(name = "user_appointments")
 class Appointments : ParentModelObject() {
     var date: Date? = null
+
     @OneToOne
     @JoinColumn(name = "professional")
     var professional: Professionals? = null
 
     @OneToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "user_details")
     var user: AccountDetails? = null
 
     @OneToOne
