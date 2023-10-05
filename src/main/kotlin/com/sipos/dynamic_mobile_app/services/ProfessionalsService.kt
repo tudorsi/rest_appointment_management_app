@@ -13,4 +13,15 @@ class ProfessionalsService @Autowired constructor(
     fun findProfessionalById(professionalId: UUID): Professionals {
         return professionalsRepository.findById(professionalId).get()
     }
+
+    fun findProfessionalByBusinessId(businessId: UUID): MutableList<Professionals> {
+        val returnedProfessionals = mutableListOf<Professionals>()
+        val professionals = professionalsRepository.findAll()
+        professionals.forEach { professional ->
+            if (professional.business?.getUUID() == businessId) {
+                returnedProfessionals.add(professional)
+            }
+        }
+        return returnedProfessionals
+    }
 }

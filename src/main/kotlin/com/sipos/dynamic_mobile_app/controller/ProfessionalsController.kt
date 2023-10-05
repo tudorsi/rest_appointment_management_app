@@ -56,4 +56,28 @@ class ProfessionalsController(
         appointmentServicesRepository.save(service)
         return SuccessResponse(true)
     }
+
+    @GetMapping("getBusinessProfessionalsByServiceId/{businessId}")
+    fun getBusinessProfessionalsByServiceId(
+        @PathVariable businessId: UUID,
+        @RequestParam serviceId: UUID
+    ): List<ProfessionalResponseDto> {
+        val professionals = professionalsService.findProfessionalByBusinessId(businessId)
+        val serviceProfessionals = mutableListOf<Professionals>()
+        val returnedProfessionals = mutableListOf<ProfessionalResponseDto>()
+        professionals.forEach { professional ->
+            val services = professional.services
+            services.forEach { service ->
+                if (service.getUUID() == serviceId) {
+                    serviceProfessionals.add(professional)
+                }
+            }
+        }
+        serviceProfessionals.forEach { serviceProfessional ->
+            returnedProfessionals.add(
+                ProfessionalResponseDto.professionalToResponseDto(serviceProfessional)
+            )
+        }
+        return returnedProfessionals
+    }
 }
