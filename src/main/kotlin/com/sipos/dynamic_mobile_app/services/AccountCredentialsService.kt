@@ -14,14 +14,14 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Service
-class AccountCredentialsService @Autowired constructor(
+open class AccountCredentialsService @Autowired constructor(
     private val accountCredentialsRepository: AccountCredentialsRepository,
     private val userDetailRepository: UserDetailsRepository,
     private val passwordEncoder: PasswordEncoder
 
 ) : UserDetailsService {
     @Transactional
-    fun register(requestBody: RegisterRequestBody): SuccessResponse {
+    open fun register(requestBody: RegisterRequestBody): SuccessResponse {
         //TODO: encode password
         val hashedPassword = passwordEncoder.encode(requestBody.password)
         val accountCredentials = AccountCredentials()

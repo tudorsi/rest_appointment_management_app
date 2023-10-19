@@ -28,17 +28,17 @@ import org.springframework.security.web.SecurityFilterChain
 @EnableAutoConfiguration
 @ComponentScan
 @EnableWebSecurity
-class WebSecurityConfiguration() {
+open class WebSecurityConfiguration() {
     private lateinit var tokenService: TokenService
     private lateinit var accountCredentialsService: AccountCredentialsService
 
     @Bean
-    fun encoder(): PasswordEncoder? {
+    open fun encoder(): PasswordEncoder? {
         return BCryptPasswordEncoder()
     }
 
     @Bean
-    fun authProvider(): DaoAuthenticationProvider {
+    open fun authProvider(): DaoAuthenticationProvider {
         val authProvider = DaoAuthenticationProvider()
         authProvider.setUserDetailsService(accountCredentialsService)
         authProvider.setPasswordEncoder(encoder())
@@ -47,7 +47,7 @@ class WebSecurityConfiguration() {
 
     @Bean
     @Throws(Exception::class)
-    fun authManager(http: HttpSecurity): AuthenticationManager? {
+    open fun authManager(http: HttpSecurity): AuthenticationManager? {
         return http.getSharedObject(AuthenticationManagerBuilder::class.java)
             .authenticationProvider(authProvider())
             .build()

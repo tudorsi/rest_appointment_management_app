@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 
 @Service
-class TokenService @Autowired constructor(
+open class TokenService @Autowired constructor(
     private val jwtDecoder: JwtDecoder,
     private val jwtEncoder: JwtEncoder,
     private val userService: AccountCredentialsService,

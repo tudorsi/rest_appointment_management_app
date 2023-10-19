@@ -16,19 +16,19 @@ import javax.crypto.spec.SecretKeySpec
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-class JwtEncodingConfig(
+open class JwtEncodingConfig(
     @Value("\${security.key}")
     private val jwtKey: String,
 ) {
     private val secretKey = SecretKeySpec(jwtKey.toByteArray(), "HmacSHA256")
 
     @Bean
-    fun jwtDecoder(): JwtDecoder {
+    open fun jwtDecoder(): JwtDecoder {
         return NimbusJwtDecoder.withSecretKey(secretKey).build()
     }
 
     @Bean
-    fun jwtEncoder(): JwtEncoder {
+    open fun jwtEncoder(): JwtEncoder {
         val secret = ImmutableSecret<SecurityContext>(secretKey)
         return NimbusJwtEncoder(secret)
     }
